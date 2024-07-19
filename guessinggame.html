@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS</title>
+    <style>
+      input {
+        border: 1px solid rgb(201, 192, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1>This a JS code in use</h1>
+    <input type="text" placeholder="Enter your email" /> <br />
+    <input
+      type="password"
+      name="password"
+      id="pass"
+      placeholder="Enter your password"
+    />
+    <br />
+    <input type="checkbox" id="checkbox" />Show password <br /> -->
+    <h1>Welcome to a guessing game!</h1>
+    <h2>
+      You are supposed to guess a country from the list we have and if you guess
+      correct, your streak will increase. If you fail, you will lose.
+    </h2>
+    <h2>
+      These are the countries in the list: Brazil, Japan, Australia, Canada,
+      Italy, India, Egypt, Mexico, Russia, South Africa, Argentina, Spain,
+      Greece, China, Turkey, Norway, Thailand, Sweden, Netherlands, Portugal,
+      Kenya
+    </h2>
+    <h3 id="streak">Streak: 0</h3>
+    <h3 id="win">Wins: 0</h3>
+    <input type="text" placeholder="Guess" id="guess" /> <br />
+    <br />
+
+    <input type="button" value="Click me" id="butt" onclick="clickMe()" />
+
+    <script>
+      var streak = 0;
+      var win = 0;
+      var defaultBackgroundColor = (document.querySelector(
+        "body"
+      ).style.backgroundColor = "white");
+      function clickMe() {
+        var list = ["Brazil", "Japan", "Australia", "Canada"];
+
+        var index = Math.floor(Math.random() * list.length);
+        var correct = list[index].toLowerCase();
+
+        var user_guess = document.getElementById("guess").value;
+        if (user_guess == list[index]) {
+          streak++;
+          document.getElementById("streak").innerHTML = "Streak: " + streak;
+          console.log(streak);
+        } else {
+          streak = 0;
+          document.getElementById("streak").innerHTML = "Streak: " + streak;
+          document.querySelector("body").style.backgroundColor = "red";
+          setTimeout(function () {
+            alert("Lost. The correct answer was: " + list[index]);
+            document.querySelector("body").style.backgroundColor =
+              defaultBackgroundColor;
+          }, 100);
+        }
+
+        if (streak == 5) {
+          win++;
+          streak = 0;
+          document.getElementById("win").innerHTML = "Wins: " + win;
+          document.querySelector("body").style.backgroundColor = "green";
+          setTimeout(function () {
+            alert("You won!");
+            document.querySelector("body").style.backgroundColor =
+              defaultBackgroundColor;
+          }, 100);
+          document.getElementById("streak").innerHTML = "Streak: " + streak;
+        }
+        document.getElementById("guess").value = "";
+      }
+
+      // alert(index);
+      // var password = document.getElementById("pass").value;
+      // if (password == "admin123") {
+      //   console.log("ok");
+      //   document.querySelector("body").style.backgroundColor = "green";
+      // } else {
+      //   document.querySelector("body").style.backgroundColor = "red";
+      //   setTimeout(function () {
+      //     alert("bad!");
+      //   }, 100);
+      // }
+      document
+        .getElementById("guess")
+        .addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault(); // Prevent the default form submit action if inside a form
+            document.getElementById("butt").click(); // Trigger the button click
+          }
+        });
+    </script>
+  </body>
+</html>
